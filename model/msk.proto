@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option go_package = "angelaw7/msk-protobuf";
+
+message FetchJSON {
+    uint32 sampleCount = 1;
+    repeated Result results = 2;
+    string disclaimer = 3;
+}
+
+message Result {
+    string tex = 1;
+}
