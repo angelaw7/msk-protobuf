@@ -3,44 +3,51 @@ package main
 import (
 	model "angelaw7/msk-protobuf/model"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"log"
 
+	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 )
 
 func main() {
-	jsonItem := &model.FetchJSON{
-		SampleCount: 1,
-		Disclaimer:  "Hello",
-		Results: []*model.Result{
-			{Tex: "Bob"},
-		},
-	}
 
-	data, err := proto.Marshal(jsonItem)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(data)
-	ioutil.WriteFile("jsonItem.protobuf", data, 0600)
-
-	data, err = json.Marshal(jsonItem)
-	if err != nil {
-		log.Fatal(err)
-	}
-	ioutil.WriteFile("jsonItem.json", data, 0600)
-
-	data, err = ioutil.ReadFile("jsonItem.protobuf")
+	// read data from JSON file
+	data, err := ioutil.ReadFile("fetchjson.json")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	jsonItemFromFile := model.FetchJSON{}
-	if err := proto.Unmarshal(data, &jsonItemFromFile); err != nil {
+	// JSON -> protobuf
+	req := &model.FetchJSON{}
+	if err := protojson.Unmarshal(data, req); err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("jsonItem from protobuf file %+v\n", jsonItemFromFile)
 
+	// protobuf -> wire format encoding
+	data, err = proto.Marshal(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// wire format -> protobuf
+	bookFromFile := &model.FetchJSON{}
+	if err := proto.Unmarshal(data, bookFromFile); err != nil {
+		log.Fatal(err)
+	}
+
+	// protobuf -> wire format encoding
+	data, err = proto.Marshal(bookFromFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// protobuf -> JSON
+	data, err = json.Marshal(bookFromFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// write JSON back to another file
+	ioutil.WriteFile("next.json", data, 0600)
 }
