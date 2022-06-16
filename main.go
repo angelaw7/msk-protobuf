@@ -49,5 +49,5 @@ func main() {
 	}
 
 	// write JSON back to another file
-	ioutil.WriteFile("next.json", data, 0600)
+	ioutil.WriteFile("new_json_file.json", data, 0600)
 }
