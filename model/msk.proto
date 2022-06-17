@@ -4,20 +4,20 @@ import "google/protobuf/any.proto";
 option go_package = "angelaw7/msk-protobuf";
 
 message FetchJSON {
-    uint32 sample_count = 1;
+    uint32 sampleCount = 1 [json_name = "sample-count"];
     repeated Result results = 2;
     string disclaimer = 3;
 }
 
 message Result {
-    repeated Snp snp_indel_silent_np = 1;
-    repeated CnvVariants cnv_variants = 2;
-    repeated Snp snp_indel_silent = 3;
-    MetaData meta_data = 4;
-    repeated Snp snp_indel_exonic = 5;
-    repeated CnvIntragenicVariants cnv_intragenic_variants = 6; 
-    repeated SvVariants sv_variants = 7;
-    repeated Snp snp_indel_exonic_np = 8;
+    repeated Snp snp_indel_silent_np = 1 [json_name = "snp-indel-silent-np"];
+    repeated CnvVariants cnv_variants = 2 [json_name = "cnv-variants"];
+    repeated Snp snp_indel_silent = 3 [json_name = "snp-indel-silent"];
+    MetaData meta_data = 4 [json_name = "meta-data"];
+    repeated Snp snp_indel_exonic = 5 [json_name = "snp-indel-exonic"];
+    repeated CnvIntragenicVariants cnv_intragenic_variants = 6 [json_name = "cnv-intragenic-variants"]; 
+    repeated SvVariants sv_variants = 7 [json_name = "sv-variants"];
+    repeated Snp snp_indel_exonic_np = 8 [json_name = "snp-indel-exonic-np"];
 }
 
 message Snp {
@@ -62,7 +62,7 @@ message Snp {
     string exon_num = 39;
     uint32 normal_ad = 40;
     string cosmic_id = 41;
-    string clinical_signed_out = 42;
+    string clinical_signed_out = 42 [json_name = "clinical-signed-out"];
     string confidence_class = 43;
     uint32 dmp_sample_so_id = 44;
     uint32 tumor_dp = 45;
@@ -101,7 +101,7 @@ message CnvVariants {
     string cnv_filter_name = 19;
     uint32 cnv_variant_id = 20;
     string cnv_class_name = 21;
-    string clinical_signed_out = 22;
+    string clinical_signed_out = 22 [json_name = "clinical-signed-out"];
     uint32 cnv_class_cv_id = 23;
     string oncokb_interpretation = 24;
     uint32 is_reported = 25;
@@ -114,9 +114,9 @@ message MetaData {
     string metastasis_site = 4;
     double tmb_cohort_percentile = 5;
     string mrev_status_name = 6;
-    string msi_score = 7;
-    string slide_viewer_id = 8;
-    string gene_panel = 9;
+    string msi_score = 7 [json_name = "msi-score"];
+    string slide_viewer_id = 8 [json_name = "slide-viewer-id"];
+    string gene_panel = 9 [json_name = "gene-panel"];
     string dmp_patient_id = 10;
     double tmb_tt_cohort = 11;
     string so_comments = 12;
@@ -132,19 +132,19 @@ message MetaData {
     string tumor_type_code = 22;
     string legacy_patient_id = 23;
     uint32 cbx_patient_id = 24;
-    bool consent_parta = 25;
-    bool consent_partc = 26;
+    bool consent_parta = 25 [json_name = "consent-parta"];
+    bool consent_partc = 26 [json_name = "consent-partc"];
     uint32 dmp_alys_task_id = 27;
     string tumor_purity = 28;
     string mrev_comments = 29;
     uint32 sample_coverage = 30;
     uint32 gender = 31;
-    string msi_type = 32;
+    string msi_type = 32 [json_name = "msi-type"];
     string tumor_type_name = 33;
     string legacy_sample_id = 34;
     string outside_institute = 35;
     double tmb_cohort = 36;
-    string msi_comment = 37;
+    string msi_comment = 37 [json_name = "msi-comment"];
     string primary_site = 38;
     string dmp_alys_task_name = 39;
     string so_status_name = 40;
