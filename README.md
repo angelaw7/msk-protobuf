@@ -4,12 +4,11 @@ A repo to create a prototype Golang ProtocolBuffer for MPath Sample
 
 ## Installation & Usage
 
-To start local development, run the following:
+To start local development, make sure you have `fetchjson.json` in the `msk-protobuf` directory and run the following:
 
 ```
 git clone https://github.com/angelaw7/msk-protobuf.git
 cd msk-protobuf
-go get
 go run main.go
 ```
 
